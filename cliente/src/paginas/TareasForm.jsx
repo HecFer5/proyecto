@@ -1,12 +1,15 @@
 import React from 'react'
 import { Formik, Form } from 'formik'
-import { CrearTareas } from '../api/tareas.api'
 import { useTareas } from '../componentes/context/hooks'
+import { useParams } from 'react-router-dom'
 
 const TareasForm = () => {
 
+  const { crearRegistro } = useTareas()
   const { tareas } = useTareas()
-  console.log(tareas)
+  const params = useParams()
+
+  console.log(params)
 
   return (
     <>
@@ -18,14 +21,8 @@ const TareasForm = () => {
           }}
         onSubmit={async (values, actions) => {
           console.log(values)
-          try {
-            const response = await CrearTareas(values)
-            console.log(response)
-            actions.resetForm()
-          } catch (error) {
-            console.error(error)
-          }
-
+          crearRegistro(values)
+          actions.resetForm()
 
         }}
       >

@@ -10,3 +10,9 @@ export const CrearTareas = async (registro) =>
  export const BorrarTareas = async (id) =>
  await axios.delete('http://localhost:4000/tarea/' + id)
 
+ export const ListarUnaTarea = async (id) =>
+ await axios.get('http://localhost:4000/tarea/' + id)
+
+
+ export const EditaTarea = async (id, nuevosCampos) =>
+ await axios.put(`http://localhost:4000/tarea/${id}`, nuevosCampos)

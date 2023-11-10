@@ -1,7 +1,6 @@
 import { createContext, useContext, useState } from 'react'
-import { ListarTareas } from '../../api/tareas.api'
-import { BorrarTareas } from '../../api/tareas.api'
-import { CrearTareas } from '../../api/tareas.api'
+import { ListarTareas, BorrarTareas, CrearTareas, ListarUnaTarea, EditaTarea } from '../../api/tareas.api'
+
 
 
 export const TareasContext = createContext()
@@ -28,7 +27,7 @@ export const TareasContextProv = ({ children }) => {
         }
     }
 
-
+/////////////////////////////Crear un registro
     const crearRegistro = async (tarea) => {
         try {
             const response = await CrearTareas(tarea)
@@ -38,7 +37,29 @@ export const TareasContextProv = ({ children }) => {
         }
     }
 
-    return <TareasContext.Provider value={{ tareas, TraerTareas, borrarTarea, crearRegistro }}>
+      ///////////////Editar un registro
+      const editarRegisto = async (id) => {
+        try {
+           const respuesta =  await ListarUnaTarea(id)
+           return respuesta.data
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+///////////////Editar tarea
+
+const modificaRegistro = async (id, nuevosCampos) => {
+    try {
+       const respuesta =  await EditaTarea(id, nuevosCampos)
+       console.log(respuesta)
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+
+    return <TareasContext.Provider value={{ tareas, TraerTareas, borrarTarea, crearRegistro, editarRegisto, modificaRegistro }}>
         {children}
     </TareasContext.Provider>
 }

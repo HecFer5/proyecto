@@ -1,28 +1,50 @@
-import React from 'react'
+import { useEffect, useState } from 'react'
 import { Formik, Form } from 'formik'
 import { useTareas } from '../componentes/context/hooks'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 
 const TareasForm = () => {
 
-  const { crearRegistro } = useTareas()
-  const { tareas } = useTareas()
-  const params = useParams()
+  const { crearRegistro, editarRegisto, modificaRegistro } = useTareas()
+  const [task, setTask] = useState({
+    nombre: "",
+    cientifico: "",
+  })
 
-  console.log(params)
+  const params = useParams()
+  const navigate = useNavigate()
+  useEffect(() => {
+    const traerTarea = async () => {
+      if (params.id) {
+        const task = await editarRegisto(params.id)
+        setTask({
+          nombre: task.nombre,
+          cientifico: task.cientifico
+        })
+      }
+    }
+    traerTarea()
+  }, [])
 
   return (
-    <>
+    <div>
+      <h1>{params.id ? 'Editar un Registro' : 'Ingresar un registro'}</h1>
+      
       <Formik
-        initialValues={
-          {
-            nombre: "",
-            cientifico: "",
-          }}
+        initialValues={task} 
+        enableReinitialize={true}
         onSubmit={async (values, actions) => {
           console.log(values)
-          crearRegistro(values)
-          actions.resetForm()
+if (params.id){
+ await modificaRegistro(params.id, values)
+ navigate('/')
+}else{
+  await crearRegistro(values)
+}
+          setTask({
+            nombre:'',
+            cientifico:''
+          })
 
         }}
       >
@@ -46,7 +68,7 @@ const TareasForm = () => {
           </Form>
         )}
       </Formik>
-    </>
+    </div>
   )
 }
 

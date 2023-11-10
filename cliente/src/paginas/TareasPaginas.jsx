@@ -3,7 +3,7 @@ import TareasCard from '../componentes/TareasCard'
 import { useTareas } from '../componentes/context/hooks'
 
 function TareasPaginas() {
-  const { tareas, TraerTareas } = useTareas()
+  const { tareas, TraerTareas, modificaRegistro } = useTareas()
 
   useEffect(() => {
     TraerTareas()

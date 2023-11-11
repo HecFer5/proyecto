@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom'
 
 function NavBar() {
     return (
-        <>
+        <div className='bg-zinc-700 flex justify-between'>
             <h1>Mysql</h1>
-            <ul>
+            <ul className='flex'>
                 <li>
                     <Link to={'/'}>Home</Link>
                 </li>
@@ -13,7 +13,7 @@ function NavBar() {
                     <Link to={'/new'}>Ingresar registro </Link>
                 </li>
             </ul>
-        </>
+        </div>
 
     )
 }

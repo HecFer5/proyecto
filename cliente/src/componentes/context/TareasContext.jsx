@@ -1,5 +1,5 @@
 import { createContext, useContext, useState } from 'react'
-import { ListarTareas, BorrarTareas, CrearTareas, ListarUnaTarea, EditaTarea } from '../../api/tareas.api'
+import { ListarTareas, BorrarTareas, CrearTareas, ListarUnaTarea, EditaTarea, ToogleTaskDoneRec } from '../../api/tareas.api'
 
 
 
@@ -27,7 +27,7 @@ export const TareasContextProv = ({ children }) => {
         }
     }
 
-/////////////////////////////Crear un registro
+    /////////////////////////////Crear un registro
     const crearRegistro = async (tarea) => {
         try {
             const response = await CrearTareas(tarea)
@@ -37,29 +37,41 @@ export const TareasContextProv = ({ children }) => {
         }
     }
 
-      ///////////////Editar un registro
-      const editarRegisto = async (id) => {
+    ///////////////Editar un registro
+    const editarRegisto = async (id) => {
         try {
-           const respuesta =  await ListarUnaTarea(id)
-           return respuesta.data
+            const respuesta = await ListarUnaTarea(id)
+            return respuesta.data
         } catch (error) {
             console.log(error)
         }
     }
 
-///////////////Editar tarea
+    ///////////////Editar tarea
 
-const modificaRegistro = async (id, nuevosCampos) => {
-    try {
-       const respuesta =  await EditaTarea(id, nuevosCampos)
-       console.log(respuesta)
-    } catch (error) {
-        console.log(error)
+    const modificaRegistro = async (id, nuevosCampos) => {
+        try {
+            const respuesta = await EditaTarea(id, nuevosCampos)
+            console.log(respuesta)
+        } catch (error) {
+            console.log(error)
+        }
     }
-}
+
+    const toogleTaskDone = async (id) => {
+        try {
+            const tareaEncontrad = tareas.find((tarea) => tarea.id === id)
+            await ToogleTaskDoneRec(id, tareaEncontrad.hecho === 0 ? 1 : 0)
+            tareas.map(tarea => tarea.id === id ? tarea.hecho = tarea.hecho  === 0 ? 1 : 0 : tarea.hecho)
+            setTareas([...tareas])
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
 
-    return <TareasContext.Provider value={{ tareas, TraerTareas, borrarTarea, crearRegistro, editarRegisto, modificaRegistro }}>
+    return <TareasContext.Provider value={{ tareas, TraerTareas, borrarTarea, crearRegistro, editarRegisto, modificaRegistro, toogleTaskDone }}>
         {children}
     </TareasContext.Provider>
 }

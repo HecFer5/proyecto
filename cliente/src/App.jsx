@@ -11,7 +11,9 @@ function App() {
 
 
   return (
-    <TareasContextProv>
+
+    <div className='bg-zinc-900 h-screen'>
+        <TareasContextProv>
       <NavBar />
       <Routes>
         <Route path='/' Component={TareasPaginas} />
@@ -20,6 +22,8 @@ function App() {
         <Route path='*' Component={NotFound} />
       </Routes>
     </TareasContextProv>
+    </div>
+  
   )
 }
 

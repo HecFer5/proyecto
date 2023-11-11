@@ -64,7 +64,7 @@ if (params.id){
               placeholder='Sólo si conoce el nombre'
               value={values.cientifico} />
             <button type='submit' disabled={isSubmitting}>
-              {isSubmitting ? "Guardar" : "Guardando"}</button>
+              {isSubmitting ? "Guardando" : "Guardar"}</button>
           </Form>
         )}
       </Formik>

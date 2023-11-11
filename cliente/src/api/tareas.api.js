@@ -16,3 +16,8 @@ export const CrearTareas = async (registro) =>
 
  export const EditaTarea = async (id, nuevosCampos) =>
  await axios.put(`http://localhost:4000/tarea/${id}`, nuevosCampos)
+
+ export const ToogleTaskDoneRec = async (id, hecho) =>
+ await axios.put(`http://localhost:4000/tarea/${id}`, {
+    hecho,
+ })

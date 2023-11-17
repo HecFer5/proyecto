@@ -1,11 +1,14 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import {Container} from '@mui/material'
+
 
 function NavBar() {
     return (
-        <div className='bg-zinc-700 flex justify-between'>
+        <Container maxWidth="sm" fixed>
+        <div >
             <h1>Mysql</h1>
-            <ul className='flex'>
+            <ul>
                 <li>
                     <Link to={'/'}>Home</Link>
                 </li>
@@ -14,7 +17,7 @@ function NavBar() {
                 </li>
             </ul>
         </div>
-
+</Container>
     )
 }
 

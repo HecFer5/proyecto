@@ -9,14 +9,18 @@ function TareasPaginas() {
     TraerTareas()
   }, [])
 
+  function renderMain() {
+    if (tareas.length === 0) return <h1>no hay registros</h1>
+    return tareas.map((tarea) =>
+      <TareasCard tarea={tarea} key={tarea.id} />)
+  }
 
   return (
     <div>
-      <h1>Listado de Orquideas</h1>
-
-      {tareas.length === 0 ? <h1>no hay registros</h1> : tareas.map((tarea) => (
-        <TareasCard tarea={tarea} key={tarea.id} />
-      ))}
+      <h1 >Listado de Orquideas</h1>
+      <div >
+        {renderMain()}
+      </div>
     </div>
   )
 }

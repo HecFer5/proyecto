@@ -1,5 +1,6 @@
 import { createContext, useContext, useState } from 'react'
 import { ListarTareas, BorrarTareas, CrearTareas, ListarUnaTarea, EditaTarea, ToogleTaskDoneRec } from '../../api/tareas.api'
+import { Alert } from '@mui/material'
 
 
 
@@ -20,8 +21,11 @@ export const TareasContextProv = ({ children }) => {
     ///////////////para borrar un registro
     const borrarTarea = async (id) => {
         try {
+            
             const respuesta = await BorrarTareas(id)
+            
             setTareas(tareas.filter(tarea => tarea.id !== id))
+            
         } catch (error) {
             console.log(error)
         }
@@ -58,20 +62,20 @@ export const TareasContextProv = ({ children }) => {
         }
     }
 
-    const toogleTaskDone = async (id) => {
-        try {
-            const tareaEncontrad = tareas.find((tarea) => tarea.id === id)
-            await ToogleTaskDoneRec(id, tareaEncontrad.hecho === 0 ? 1 : 0)
-            tareas.map(tarea => tarea.id === id ? tarea.hecho = tarea.hecho  === 0 ? 1 : 0 : tarea.hecho)
-            setTareas([...tareas])
+    // const toogleTaskDone = async (id) => {
+    //     try {
+    //         const tareaEncontrad = tareas.find((tarea) => tarea.id === id)
+    //         await ToogleTaskDoneRec(id, tareaEncontrad.hecho === 0 ? 1 : 0)
+    //         tareas.map(tarea => tarea.id === id ? tarea.hecho = tarea.hecho  === 0 ? 1 : 0 : tarea.hecho)
+    //         setTareas([...tareas])
 
-        } catch (error) {
-            console.log(error)
-        }
-    }
+    //     } catch (error) {
+    //         console.log(error)
+    //     }
+    // }
 
 
-    return <TareasContext.Provider value={{ tareas, TraerTareas, borrarTarea, crearRegistro, editarRegisto, modificaRegistro, toogleTaskDone }}>
+    return <TareasContext.Provider value={{ tareas, TraerTareas, borrarTarea, crearRegistro, editarRegisto, modificaRegistro }}>
         {children}
     </TareasContext.Provider>
 }

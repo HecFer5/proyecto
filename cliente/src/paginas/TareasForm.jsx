@@ -12,6 +12,7 @@ const TareasForm = () => {
   })
 
   const params = useParams()
+
   const navigate = useNavigate()
   useEffect(() => {
     const traerTarea = async () => {
@@ -28,24 +29,28 @@ const TareasForm = () => {
 
   return (
     <div>
-      <h1>{params.id ? 'Editar un Registro' : 'Ingresar un registro'}</h1>
-      
+      <hr />
+      <hr/>
+      <hr/>
+      <hr/>
+      <h1>{params.id ? 'Editar un Registro' : 'Ingresar un nuevo registro'}</h1>
+
       <Formik
-        initialValues={task} 
+        initialValues={task}
         enableReinitialize={true}
         onSubmit={async (values, actions) => {
           console.log(values)
-if (params.id){
- await modificaRegistro(params.id, values)
- navigate('/')
-}else{
-  await crearRegistro(values)
-}
+          if (params.id) {
+            await modificaRegistro(params.id, values)
+            navigate('/')
+          } else {
+            navigate('/otroReg')
+            await crearRegistro(values)         
+          }
           setTask({
-            nombre:'',
-            cientifico:''
+            nombre: '',
+            cientifico: ''
           })
-
         }}
       >
 

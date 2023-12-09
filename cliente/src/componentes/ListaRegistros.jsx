@@ -1,6 +1,7 @@
 import MUIDataTable from 'mui-datatables'
 import axios from 'axios'
 import { useState, useEffect } from 'react'
+import {Box} from '@mui/material'
 
 
 
@@ -38,17 +39,19 @@ const ListaRegistros = () => {
 
     return (
 <div>
+
 <hr />
-<hr />
-<hr />
-<hr />
-<hr />
-        <MUIDataTable
+<Box mt={20} sx={{maxWidth: 1200, display: 'flex'}}>
+
+
+        <MUIDataTable elevation= {14}
             data={registros}
             columns={columnas}
             title={'Listado de ingresos'}
+            responsive={'vertical'}
 
         />
+        </Box>
 </div>
 
     )

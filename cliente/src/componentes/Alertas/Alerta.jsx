@@ -4,7 +4,7 @@ import Button from '@mui/material/Button';
 import { Typography, Alert, AlertTitle } from '@mui/material';
 import Modal from '@mui/material/Modal';
 import { useState } from 'react'
-import { useNavigate , useParams} from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useTareas } from "../context/hooks"
 
 
@@ -30,30 +30,28 @@ export default function Alerta() {
   const handleClose = () => setOpen(false);
   const navigate = useNavigate()
   const { borrarTarea } = useTareas()
-  const params =useParams()
+  const params = useParams()
   console.log(params.id)
 
-  
+
   return (
-    <div>
-      <Button onClick={handleOpen}>Open modal</Button>
+    <>
       <Modal
         open={open}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
+        aria-describedby="modal-modal-description" >
         <Box sx={style}>
           <AlertTitle>Se va a borrar el registro</AlertTitle>
           <Alert severity="error" action=
-          <>
+            <>
               <Button color='warning' onClick={() => navigate('/')}>No, cancelar</Button>
-              <Button color='primary' onClick={() => {borrarTarea(params.id) } }>Si</Button>
+              <Button color='primary' onClick={() => { borrarTarea(params.id) }}>Si</Button>
               {navigate('/')}
-          </>
-          >¿Está seguro de la operación?</Alert>
+            </>
+          >¿Está seguro de continuar?</Alert>
         </Box>
       </Modal>
-    </div>
+    </>
   );
 }

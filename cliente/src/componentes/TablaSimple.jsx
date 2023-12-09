@@ -1,9 +1,22 @@
 import { getCoreRowModel, useReactTable, flexRender } from '@tanstack/react-table'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
+import {
+  TableContainer,
+  Table,
+  TableHead,
+  TableBody,
+  TableCell,
+  TableRow,
+  TablePagination
+} from '@mui/material'
+import { Button } from '@mui/material'
+import { useNavigate } from 'react-router-dom'
+
 
 
 const TablaSimple = () => {
+  const navigate = useNavigate()
   const [registros, setRegistros] = useState()
   const ListarTareas = async () =>
     await axios.get('http://localhost:4000/tarea').then((response) => {
@@ -21,40 +34,32 @@ const TablaSimple = () => {
   const columns = [
     {
       header: 'ID',
-      accessorKey: 'id'
+      accessorKey: 'id',
 
     },
     {
       accessorKey: 'nombre',
-      header: 'Nombre común'
+      header: 'Nombre común',
     },
     {
       accessorKey: 'cientifico',
-      header: 'Nombre Científico'
+      header: 'Nombre Científico',
     },
     {
       accessorKey: 'creadoEn',
-      header: 'Fecha de ingreso'
+      header: 'Fecha de ingreso',
     },
   ]
 
   const table = useReactTable({
     registros,
-    columns,
-    getCoreRowModel: getCoreRowModel(),
+    columns
   })
 
 
   return (
     <>
 
-      <hr />
-      <hr />
-      <hr />
-      <hr />
-      <hr />
-      <hr />
-      <hr />
       <div>
         <table>
           <thead>
@@ -72,17 +77,18 @@ const TablaSimple = () => {
               ))
             }
           </thead>
-          <tbody>
-               {table.getRowModel().rows.map((row) => (
-                 <tr key={row.id} >
-                   {row.getVisibleCells().map((cell) => (
-                     <td  key={cell.id}>
-                       {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                     </td>
-                   ))}
-                 </tr>
-               ))}
-             </tbody>
+          <TableBody>
+            {registros.map(celda => (
+              <TableRow key={celda.id}>
+                <TableCell align='right'>{celda.id}</TableCell>
+                <TableCell align='right'>{celda.nombre}</TableCell>
+                <TableCell align='right'>{celda.cientifico}</TableCell>
+                <TableCell align='right'>{celda.creadoEn}</TableCell>
+                <Button  size="small" variant="contained" color="primary" onClick={() => navigate(`/edit/${celda.id}`)}>Editar</Button>
+                <Button size="small" sx={{ marginLeft: "auto" }} variant="contained" color="secondary" onClick={() => navigate(`/borrar/${celda.id}`)}>Eliminar</Button>
+              </TableRow>
+            ))}
+          </TableBody>
         </table>
       </div>
     </>

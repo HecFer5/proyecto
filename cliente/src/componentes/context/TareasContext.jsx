@@ -68,8 +68,7 @@ export const TareasContextProv = ({ children }) => {
     //         await ToogleTaskDoneRec(id, tareaEncontrad.hecho === 0 ? 1 : 0)
     //         tareas.map(tarea => tarea.id === id ? tarea.hecho = tarea.hecho  === 0 ? 1 : 0 : tarea.hecho)
     //         setTareas([...tareas])
-
-    //     } catch (error) {
+  //     } catch (error) {
     //         console.log(error)
     //     }
     // }

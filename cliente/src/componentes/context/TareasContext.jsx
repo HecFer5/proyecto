@@ -35,7 +35,7 @@ export const TareasContextProv = ({ children }) => {
     const crearRegistro = async (tarea) => {
         try {
             const response = await CrearTareas(tarea)
-            console.log(response)
+            console.log(response, 'hhhhhhh')
         } catch (error) {
             console.error(error)
         }

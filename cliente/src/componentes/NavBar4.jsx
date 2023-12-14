@@ -23,8 +23,8 @@ const NavBar4 = () => {
 
       {/* <nav className="navbar navbar-expand-lg navbar-light bg-light "> */}
       {/* <div className="container-fluid "> */}
-      <nav id='menu' className="flex justify-between p-10 m-auto px-10 text-lg font-bold tracking-widest md:items-center ">
-        <a href=""><img src="../../imagenes/logo.svg" width={28} alt="" /></a>
+      <nav id='menu' className="flex justify-between p-0 m-auto px-0 text-lg font-bold tracking-widest md:items-center ">
+        <a href=""><img src="../../imagenes/logo.jfif"  className='container p-3 w-3/4' alt="" /></a>
         <div
           id='menu'
           className={'bg-white dark:bg-slate-800 p-7 h-[380px] w-[320px] md:flex flex-col items-start justify-around rounded-lg text-dark dark:text-white md:flex-row md:w-full md:py-0 md:h-[50px] md:bg-inherit md:dark:bg-primary ' + abierto} >
@@ -40,7 +40,7 @@ const NavBar4 = () => {
 
 
         </div>
-        <button id='menuButton' className='absolute top-10 right-12 md:hidden ' onClick={() => setOpen(true)}>
+        <button id='menuButton' className='absolute top-10 right-12 md:hidden  ' onClick={() => setOpen(true)}>
           <img src={abierto != 'hidden' ? "../../imagenes/x-square-fill.svg" : "../../imagenes/list.svg"} alt="" />
         </button>
       </nav>

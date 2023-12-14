@@ -1,18 +1,16 @@
 import { useEffect, useState } from 'react'
-import { Formik, Form } from 'formik'
 import { useTareas } from '../componentes/context/hooks'
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 
-const Ficha = ({registro}) => {
+const Ficha = () => {
 
-  const { crearRegistro, editarRegisto, modificaRegistro } = useTareas()
+  const {editarRegisto } = useTareas()
   const [task, setTask] = useState({
     nombre: "",
     cientifico: "",
   })
 
   const params = useParams()
-  const navigate = useNavigate()
 
   useEffect(() => {
     const traerTarea = async () => {
@@ -20,7 +18,8 @@ const Ficha = ({registro}) => {
         const task = await editarRegisto(params.id)
         setTask({
           nombre: task.nombre,
-          cientifico: task.cientifico
+          cientifico: task.cientifico,
+          comentario: task.comentario
         })
       }
     }
@@ -28,60 +27,18 @@ const Ficha = ({registro}) => {
   }, [])
 
   return (
-    <div className="container ">
-      <div className="row">
-        <div className="col border-s-4 bg-slate-400 text-center">{params.id}</div>
-        <div className="col border">{task.nombre}</div>
-
+    <div className='justify-center flex'> 
+    <div className="max-w-sm bg-white border border-gray-400 rounded shadow p-3">
+    <div className="col  text-left mb-2 ">{`Número de orden: ${params.id}`}</div>
+      <a href="#">
+        <img src="../../imagenes/logo.jfif" alt="imagen" className='rounded-t-lg'/>
+      </a>
+        <div className="col border mt-1">{`Nombre Común: ${task.nombre}`}</div>
+        <div className="col border mt-1">{`Nombre Cinetífico: ${task.cientifico}`}</div>
+        <div className="col border mt-1 bg-orange-200 p-1 rounded-md">{`Comentarios: ${task.comentario}`}</div>
+        <li className="block bg-blue-700 mt-3 px-2 py-1 text-white text-center rounded-md w-full"><Link to={'/tabla/'} >Volver</Link></li>
       </div>
-
     </div>
-    // <div>
-    //   <hr />
-    //   <hr/>
-    //   <hr/>
-    //   <hr/>
-    //   <h1>{params.id ? 'Editar un Registro' : 'Ingresar un nuevo registro'}</h1>
-
-    //   <Formik
-    //     initialValues={task}
-    //     enableReinitialize={true}
-    //     onSubmit={async (values, actions) => {
-    //       console.log(values)
-    //       if (params.id) {
-    //         await modificaRegistro(params.id, values)
-    //         navigate('/')
-    //       } else {
-    //         navigate('/otroReg')
-    //         await crearRegistro(values)         
-    //       }
-    //       setTask({
-    //         nombre: '',
-    //         cientifico: ''
-    //       })
-    //     }}
-    //   >
-
-    //     {({ handleChange, handleSubmit, values, isSubmitting }) => (
-    //       <Form onSubmit={handleSubmit}>
-    //         <label>Nombre Común</label>
-    //         <input type="text"
-    //           name='nombre'
-    //           onChange={handleChange}
-    //           placeholder='Ingrese un nombre'
-    //           value={values.nombre} />
-    //         <label>Nombre Cinetífico</label>
-    //         <input type="text"
-    //           name='cientifico'
-    //           onChange={handleChange}
-    //           placeholder='Sólo si conoce el nombre'
-    //           value={values.cientifico} />
-    //         <button type='submit' disabled={isSubmitting}>
-    //           {isSubmitting ? "Guardando" : "Guardar"}</button>
-    //       </Form>
-    //     )}
-    //   </Formik>
-    // </div>
   )
 }
 

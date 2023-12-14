@@ -4,7 +4,7 @@ import Button from '@mui/material/Button';
 import { Typography, Alert, AlertTitle } from '@mui/material';
 import Modal from '@mui/material/Modal';
 import { useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams, Link } from 'react-router-dom'
 import { useTareas } from "../context/hooks"
 
 
@@ -26,7 +26,6 @@ const style = {
 
 export default function Alerta() {
   const [open, setOpen] = useState(true);
-  const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const navigate = useNavigate()
   const { borrarTarea } = useTareas()
@@ -42,14 +41,13 @@ export default function Alerta() {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description" >
         <Box sx={style}>
-          <AlertTitle>Se va a borrar el registro</AlertTitle>
-          <Alert severity="error" action=
-            <>
-              <Button color='warning' onClick={() => navigate('/')}>No, cancelar</Button>
-              <Button color='primary' onClick={() => { borrarTarea(params.id) }}>Si</Button>
-              {navigate('/')}
-            </>
-          >¿Está seguro de continuar?</Alert>
+          <div className='text-xm text-red-700 font-bold uppercase text-center '>{`¡Se va a borrar el registro nº ${params.id}!`}</div>
+          <div className="text-sm text-center font-bold mt-2 mb-3">¿Está seguro de continuar?</div>
+         
+          <button onClick={() => { borrarTarea(params.id) }} className="block bg-blue-700 px-2 py-1 text-white rounded-md w-full text-center">Si</button>
+
+         { navigate('/tabla')}
+          { <li className="block bg-red-700 px-2 py-1 text-white w-full text-center mt-3 rounded-md"><Link to={'/tabla/'} >No</Link></li>}
         </Box>
       </Modal>
     </>

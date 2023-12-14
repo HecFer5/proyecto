@@ -1,10 +1,7 @@
-import React from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import { AlertTitle } from '@mui/material';
 import Modal from '@mui/material/Modal';
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 import {Link} from 'react-router-dom'
 
 
@@ -28,7 +25,6 @@ export default function NuevoReg({ values }) {
   const [open, setOpen] = useState(true);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const navigate = useNavigate()
   
 
   return (
@@ -41,21 +37,11 @@ export default function NuevoReg({ values }) {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <AlertTitle>INGRESADO CON EXITO</AlertTitle>
-          <AlertTitle>¿Quiere ingresar otro registo?</AlertTitle>
-         { <li className="block bg-lime-700 px-2 py-1 text-white w-min rounded-md"><Link to={'/new/'} >Si</Link></li>}
-          { <li className="block bg-lime-700 px-2 py-1 text-white w-min rounded-md"><Link to={'/new/'} >No</Link></li>}
-          {/* <Alert severity="success" variant='filled' sx={{cursor: 'pointer', tr: {'&:hover': { color: 'red' }} }} onClick={() => navigate('/new')} 
-          > ¿Quiere seguir ingresando? </Alert> */}
-          {/* {<Button color='success' size='large' onClick={() => navigate('/new')}>¿oTRO INGRESO?</Button>} */}
-
-          {/* <Alert id="modal-modal-title" variant="h6" component="h2" onClick={() => navigate('/')}>
-            O volver a la página principal
-          </Alert> */}
-          {/* {<Button color='warning' size='large' onClick={() => navigate('/')}>Volver a la Página Principal</Button>} */}
-          {/*    <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-          </Typography> */}
+          <div className='text-xl font-bold uppercase text-center '>OPERACION EXITOSA</div>
+          <div className="text-sm text-center font-bold mt-2 mb-3">¿Quere ingresar otro registro?</div>
+         
+         { <li className="block bg-blue-700 px-2 py-1 text-white rounded-md w-full text-center"><Link to={'/new/'} >Si</Link></li>}
+          { <li className="block bg-red-700 px-2 py-1 text-white w-full text-center mt-3 rounded-md"><Link to={'/tabla/'} >No</Link></li>}
         </Box>
       </Modal>
     </div>
